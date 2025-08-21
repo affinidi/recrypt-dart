@@ -1,0 +1,20 @@
+name: recrypt
+description: A proxy re-encryption library for Dart.
+version: 1.0.0
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  pointycastle: ^4.0.0  # For elliptic curve operations
+  crypto: ^3.0.3        # For SHA256 and other crypto functions
+  convert: ^3.1.1       # For hex encoding/decoding
+  cryptography: ^2.7.0
+  encrypt: ^5.0.3       # For AES encryption
+
+
+dev_dependencies:
+  test: ^1.24.0
+  lints: ^6.0.0
+
+dependency_overrides:
+  pointycastle: ^4.0.0 # override as all other lib versions use version 4

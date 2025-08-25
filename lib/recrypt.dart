@@ -1,4 +1,4 @@
-library recrypt;
+library proxy_recrypt;
 
 export 'src/constants.dart';
 export 'src/scalar/scalar.dart';

@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'dart:convert';
-import 'package:recrypt/recrypt.dart';
-import 'package:recrypt/src/crypto/shared_encryptor.dart';
+import 'package:proxy_recrypt/recrypt.dart';
+// import 'package:recrypt/src/crypto/shared_encryptor.dart';
 
 void main() {
   late Recrypt recrypt;

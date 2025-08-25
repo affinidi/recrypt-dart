@@ -22,7 +22,8 @@ class Capsule {
     var bytes = base64Decode(base64);
     if (bytes.length < 162) {
       throw ArgumentError(
-          'Invalid capsule length: ${bytes.length} bytes. Expected at least 162 bytes.');
+        'Invalid capsule length: ${bytes.length} bytes. Expected at least 162 bytes.',
+      );
     }
     var E = GroupElement.fromBytes(bytes.sublist(0, 65), params);
     var V = GroupElement.fromBytes(bytes.sublist(65, 130), params);

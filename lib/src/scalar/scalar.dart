@@ -11,7 +11,7 @@ class Scalar {
 
   /// Create a Scalar from bytes
   static Scalar fromBytes(Uint8List bytes, [BigInt? order]) {
-    order ??= pc.ECDomainParameters(DEFAULT_CURVE).n;
+    order ??= pc.ECDomainParameters(defaultCurve).n;
     return Scalar(
         BigInt.parse(
             bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join(),

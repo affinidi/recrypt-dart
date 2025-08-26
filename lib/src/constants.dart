@@ -1,1 +1,1 @@
-const DEFAULT_CURVE = 'secp256k1';
+const defaultCurve = 'secp256k1';

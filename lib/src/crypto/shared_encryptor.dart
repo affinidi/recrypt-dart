@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:encrypt/encrypt.dart' as encrypt_pkg;
-import 'package:proxy_recrypt/recrypt.dart';
+import '../../recrypt.dart';
 
 /// A class representing a shared key that can be used for encryption and decryption.
 ///

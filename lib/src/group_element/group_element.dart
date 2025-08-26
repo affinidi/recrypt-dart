@@ -13,7 +13,7 @@ class GroupElement {
   /// Create a GroupElement from bytes
   static GroupElement fromBytes(Uint8List bytes,
       [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     if (bytes.length < 65) {
       throw ArgumentError(
           'Invalid input length: ${bytes.length} bytes. Expected 65 bytes for an uncompressed EC point.');
@@ -79,8 +79,9 @@ class GroupElement {
 
   /// Add two group elements
   GroupElement add(GroupElement other) {
-    if (point == null || other.point == null)
+    if (point == null || other.point == null) {
       throw StateError('ECPoint is null');
+    }
     return GroupElement(point! + other.point!, params);
   }
 

@@ -1,6 +1,7 @@
-import 'package:test/test.dart';
 import 'dart:convert';
+
 import 'package:proxy_recrypt/recrypt.dart';
+import 'package:test/test.dart';
 // import 'package:recrypt/src/crypto/shared_encryptor.dart';
 
 void main() {
@@ -126,11 +127,11 @@ void main() {
 
     // Create a test message
     String messageString = Recrypt.generateSecureRandomMessage();
-    print('Original message: ${messageString}');
+    console.log('Original message: $messageString');
 
     // Encrypt the message
     var encryptedPackage1 = groupKeyEncryptor.encryptAndPackage(messageString);
-    print('Encrypted message package: ${encryptedPackage1}');
+    print('Encrypted message package: $encryptedPackage1');
 
     // Test serialization
     var serialized1 = groupKeyEncryptor.toBase64();
@@ -161,8 +162,8 @@ void main() {
     var deserializedTrentCapsuleC1 = Capsule.fromBase64(trentCapsuleCBase64_1);
 
     // Print re-encrypted capsules for comparison
-    print('Trent re-encrypted capsule for Bob: ${trentCapsuleBBase64_1}');
-    print('Trent re-encrypted capsule for Charlie: ${trentCapsuleCBase64_1}');
+    print('Trent re-encrypted capsule for Bob: $trentCapsuleBBase64_1');
+    print('Trent re-encrypted capsule for Charlie: $trentCapsuleCBase64_1');
 
     // Bob and Charlie decapsulate their respective capsules
     var bobKey1 =
@@ -186,8 +187,8 @@ void main() {
     var charlieDecrypted1 =
         SharedEncryptor.unpackAndDecrypt(encryptedPackage1, charlieKey1);
 
-    print('Bob decrypted message: ${bobDecrypted1}');
-    print('Charlie decrypted message: ${charlieDecrypted1}');
+    print('Bob decrypted message: $bobDecrypted1');
+    print('Charlie decrypted message: $charlieDecrypted1');
 
     // Verify decrypted messages match the original
     expect(bobDecrypted1, equals(messageString));
@@ -247,13 +248,13 @@ void main() {
 
     // Create a test message
     String groupMessageSharedKey = Recrypt.generateSecureRandomMessage();
-    print('Original message: ${groupMessageSharedKey}');
+    print('Original message: $groupMessageSharedKey');
     groupMessageSharedKey = 'Hello, world!';
 
     // Encrypt the message
     var encryptedSharedGroupKey =
         sharedEncryptor.encryptAndPackage(groupMessageSharedKey);
-    print('Encrypted message package: ${encryptedSharedGroupKey}');
+    print('Encrypted message package: $encryptedSharedGroupKey');
 
     // Test serialization
     var serialized2 = sharedEncryptor.toBase64();
@@ -290,9 +291,9 @@ void main() {
 
     // Print re-encrypted capsules for comparison
     print(
-        'Trent re-encrypted capsule for Bob (Generated): ${trentCapsuleBBase64_2}');
+        'Trent re-encrypted capsule for Bob (Generated): $trentCapsuleBBase64_2');
     print(
-        'Trent re-encrypted capsule for Charlie (Generated): ${trentCapsuleCBase64_2}');
+        'Trent re-encrypted capsule for Charlie (Generated): $trentCapsuleCBase64_2');
 
     // Bob and Charlie decapsulate their respective capsules
     var bobKey2 =
@@ -316,8 +317,8 @@ void main() {
     var charlieDecrypted2 =
         SharedEncryptor.unpackAndDecrypt(encryptedSharedGroupKey, charlieKey2);
 
-    print('Bob decrypted message: ${bobDecrypted2}');
-    print('Charlie decrypted message: ${charlieDecrypted2}');
+    print('Bob decrypted message: $bobDecrypted2');
+    print('Charlie decrypted message: $charlieDecrypted2');
 
     // Verify decrypted messages match the original
     expect(bobDecrypted2, equals(groupMessageSharedKey));
@@ -504,14 +505,14 @@ void main() {
 
     // Encrypt the message
     var aliceEncryptedPackage = aliceEncryptor.encryptAndPackage(aliceMessage);
-    print('Alice encrypted message package: ${aliceEncryptedPackage}');
+    print('Alice encrypted message package: $aliceEncryptedPackage');
 
     // Serialize both the encryptor and encrypted package to send to Trent
     var serializedEncryptor = aliceEncryptor.toBase64();
     var serializedEncryptedPackage =
         base64Encode(utf8.encode(aliceEncryptedPackage));
-    print('Serialized encryptor: ${serializedEncryptor}');
-    print('Serialized encrypted package: ${serializedEncryptedPackage}');
+    print('Serialized encryptor: $serializedEncryptor');
+    print('Serialized encrypted package: $serializedEncryptedPackage');
 
     // Trent deserializes both the encryptor and encrypted package
     var trentEncryptor = SharedEncryptor.fromBase64(serializedEncryptor);
@@ -562,7 +563,7 @@ void main() {
 
     // Encrypt the message
     var bobEncryptedPackage = bobEncryptor.encryptAndPackage(bobMessage);
-    print('Bob encrypted message package: ${bobEncryptedPackage}');
+    print('Bob encrypted message package: $bobEncryptedPackage');
 
     // Trent re-encrypts for each member
     var trentCapsuleForAlice2 =
@@ -600,7 +601,7 @@ void main() {
     // Encrypt the message
     var charlieEncryptedPackage =
         charlieEncryptor.encryptAndPackage(charlieMessage);
-    print('Charlie encrypted message package: ${charlieEncryptedPackage}');
+    print('Charlie encrypted message package: $charlieEncryptedPackage');
 
     // Trent re-encrypts for each member
     var trentCapsuleForAlice3 =

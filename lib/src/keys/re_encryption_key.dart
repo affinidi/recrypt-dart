@@ -15,7 +15,7 @@ class ReEncryptionKey {
   /// Create a ReEncryptionKey from base64 string
   static ReEncryptionKey fromBase64(String base64,
       [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var bytes = base64Decode(base64);
     var scalar = Scalar.fromBytes(bytes.sublist(0, 32), params.n);
     var point = GroupElement.fromBytes(bytes.sublist(32), params);

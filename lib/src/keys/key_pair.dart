@@ -23,7 +23,7 @@ class KeyPair {
 
   /// Create a KeyPair from JSON string
   static KeyPair fromJson(String json, [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var map = jsonDecode(json) as Map<String, dynamic>;
     var privateKey = PrivateKey.fromBase64(map['privateKey'] as String, params);
     var publicKey = PublicKey.fromBase64(map['publicKey'] as String, params);
@@ -37,7 +37,7 @@ class KeyPair {
 
   /// Create a KeyPair from base64 string
   static KeyPair fromBase64(String base64, [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var bytes = base64Decode(base64);
     if (bytes.length != 97) {
       // 32 bytes private key + 65 bytes public key
@@ -58,7 +58,7 @@ class KeyPair {
   /// Create a KeyPair with only the public key from base64 string
   static KeyPair fromPublicKeyBase64(String base64,
       [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var publicKey = PublicKey.fromBase64(base64, params);
     // Create a dummy private key since we don't have the actual private key
     var privateKey = PrivateKey(Scalar(BigInt.zero, params.n), params);

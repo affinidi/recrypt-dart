@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:proxy_recrypt/recrypt.dart';
@@ -127,7 +129,7 @@ void main() {
 
     // Create a test message
     String messageString = Recrypt.generateSecureRandomMessage();
-    console.log('Original message: $messageString');
+    print('Original message: $messageString');
 
     // Encrypt the message
     var encryptedPackage1 = groupKeyEncryptor.encryptAndPackage(messageString);

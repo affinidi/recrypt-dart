@@ -1,6 +1,5 @@
 [![release](https://github.com/affinidi/recrypt-dart/actions/workflows/release.yaml/badge.svg)](https://github.com/affinidi/recrypt-dart/actions/workflows/release.yaml)
 [![publish](https://github.com/affinidi/recrypt-dart/actions/workflows/publish.yaml/badge.svg)](https://github.com/affinidi/recrypt-dart/actions/workflows/publish.yaml)
-[![check](https://github.com/affinidi/recrypt-dart/actions/workflows/check.yaml/badge.svg)](https://github.com/affinidi/recrypt-dart/actions/workflows/check.yaml)
 
 # recrypt
 

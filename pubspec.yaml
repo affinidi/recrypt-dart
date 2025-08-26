@@ -24,3 +24,9 @@ dependency_overrides:
 
 topics:
   - proxy-reencryption
+
+command:
+  version:
+    changelogCommitBodies:
+      include: true
+      onlyBreaking: false

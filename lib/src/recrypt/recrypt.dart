@@ -1,22 +1,24 @@
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:pointycastle/pointycastle.dart' as pc;
+
 import 'package:crypto/crypto.dart';
-import '../constants.dart';
-import '../scalar/scalar.dart';
-import '../group_element/group_element.dart';
+import 'package:pointycastle/pointycastle.dart' as pc;
+
 import '../capsule/capsule.dart';
+import '../constants.dart';
+import '../group_element/group_element.dart';
+import '../keys/key_pair.dart';
 import '../keys/private_key.dart';
 import '../keys/public_key.dart';
 import '../keys/re_encryption_key.dart';
-import '../keys/key_pair.dart';
+import '../scalar/scalar.dart';
 
 /// Main class for proxy re-encryption operations
 class Recrypt {
   final pc.ECDomainParameters params;
 
   Recrypt([pc.ECDomainParameters? params])
-      : params = params ?? pc.ECDomainParameters(DEFAULT_CURVE);
+      : params = params ?? pc.ECDomainParameters(defaultCurve);
 
   /// Generate a new key pair
   KeyPair generateKeyPair() {
@@ -87,6 +89,7 @@ class Recrypt {
 
   Uint8List _decapsulateReEncrypted(Capsule capsule, PrivateKey privateKey) {
     var recipientPubKey = privateKey.getPublicKey().point;
+    // ignore: non_constant_identifier_names
     var XG = capsule.XG!; // We know it's re-encrypted, so XG must exist
 
     // Hash input: [XG, recipientPubKey, XG * privateKey] - matching JavaScript implementation

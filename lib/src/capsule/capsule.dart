@@ -9,6 +9,7 @@ class Capsule {
   final GroupElement E;
   final GroupElement V;
   final Scalar S;
+  // ignore: non_constant_identifier_names
   final GroupElement? XG;
   final pc.ECDomainParameters params;
 
@@ -18,7 +19,7 @@ class Capsule {
 
   /// Create a Capsule from base64 string
   static Capsule fromBase64(String base64, [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var bytes = base64Decode(base64);
     if (bytes.length < 162) {
       throw ArgumentError(
@@ -30,6 +31,7 @@ class Capsule {
     var S = Scalar.fromBytes(bytes.sublist(130, 162), params.n);
 
     // Parse XG if present
+    // ignore: non_constant_identifier_names
     GroupElement? XG;
     if (bytes.length >= 227) {
       // 162 + 65

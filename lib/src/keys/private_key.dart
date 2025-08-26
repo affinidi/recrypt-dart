@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
+
 import 'package:pointycastle/pointycastle.dart' as pc;
+
 import '../constants.dart';
-import '../scalar/scalar.dart';
 import '../group_element/group_element.dart';
+import '../scalar/scalar.dart';
 import 'public_key.dart';
 
 /// A class representing a private key
@@ -16,7 +18,7 @@ class PrivateKey {
 
   /// Generate a new private key
   static PrivateKey generate([pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var random = Random.secure();
     var bytes = Uint8List(32);
     for (var i = 0; i < bytes.length; i++) {
@@ -38,7 +40,7 @@ class PrivateKey {
 
   /// Create a PrivateKey from base64 string
   static PrivateKey fromBase64(String base64, [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var bytes = base64Decode(base64);
     return fromBytes(bytes, params);
   }

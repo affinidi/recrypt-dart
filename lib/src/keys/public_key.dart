@@ -12,7 +12,7 @@ class PublicKey {
 
   /// Create a PublicKey from base64 string
   static PublicKey fromBase64(String base64, [pc.ECDomainParameters? params]) {
-    params ??= pc.ECDomainParameters(DEFAULT_CURVE);
+    params ??= pc.ECDomainParameters(defaultCurve);
     var bytes = base64Decode(base64);
     return PublicKey(GroupElement.fromBytes(bytes, params), params);
   }

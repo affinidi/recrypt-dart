@@ -1,9 +1,12 @@
-# name: release
-# on:
-#   push:
-#     branches:
-#       - main
-# jobs:
-#   dart-pipeline:
-#     uses: affinidi/pipeline-dart/.github/workflows/release.yaml@main
-#     secrets: inherit
+name: release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello world
+        run: |
+          write-output "Hello World"

@@ -1,8 +1,14 @@
 name: release
+
 on:
   push:
     branches:
-      - main
+      - test/dart-security-scanner
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
 jobs:
   placeholder:
     runs-on: ubuntu-latest
@@ -10,3 +16,7 @@ jobs:
       - name: Hello world
         run: |
           echo "Hello World"
+
+  dart-security-scan:
+    uses: affinidi/pipeline-security/.github/workflows/dart-scanner.yml@main
+    secrets: inherit

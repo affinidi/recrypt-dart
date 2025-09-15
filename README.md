@@ -23,3 +23,11 @@ This library lets a data owner encrypt content once, then delegate decryption ri
 - Scales better than encrypting separately for every recipient
 - Cryptographic separation of duties (encryption, transformation, decryption)
 - Ideal when you need brokered delivery (e.g. group chat) where the transport service must route but not read messages.
+
+## Attribution
+
+This Dart implementation was inspired by the original JavaScript proxy re-encryption implementation available at:
+- [JavaScript PRE Implementation](https://asecuritysite.com/javascript/pre_javascript)
+- [Proxy Script](https://asecuritysite.com/proxy.min.js)
+
+We acknowledge and appreciate the foundational work that guided our Dart port.

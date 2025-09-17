@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:proxy_recrypt/recrypt.dart';
+import 'package:proxy_recrypt/proxy_recrypt.dart';
 import 'package:test/test.dart';
 // import 'package:recrypt/src/crypto/shared_encryptor.dart';
 

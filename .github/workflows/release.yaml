@@ -1,12 +1,11 @@
-name: release
+name: Release
 on:
   push:
     branches:
       - main
 jobs:
-  placeholder:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Hello world
-        run: |
-          echo "Hello World"
+  dart-pipeline:
+    uses: affinidi/pipeline-dart/.github/workflows/release.yaml@main
+    secrets: inherit
+    with:
+      flutter-version: "3.32.4"

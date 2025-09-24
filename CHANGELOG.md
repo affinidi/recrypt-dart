@@ -1,3 +1,58 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2025-09-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`proxy_recrypt` - `v1.1.0`](#proxy_recrypt---v110)
+
+---
+
+#### `proxy_recrypt` - `v1.1.0`
+
+ - **FIX**: updating release workflow.
+ - **FIX**: udpating version of package in changelog.
+ - **FIX**: keeping naming consistent.
+ - **FIX**: removing badge for check.
+ - **FIX**: updating placeholder.
+ - **FEAT**: add attribution to original JavaScript PRE implementation (#3).
+ - **FEAT**: adding analysis_options for dart and updating pubspec (#2).
+ - **FEAT**: updating readme with status badges.
+ - **FEAT**: adding a placeholder release workflow.
+ - **FEAT**: adding release workflow.
+ - **FEAT**: adding melos config.
+ - **FEAT**: adding workflows to check and publish.
+ - **FEAT**: updating name of the package.
+ - **FEAT**: adding recrypt code.
+
+## 1.1.0
+
+ - **FIX**: updating release workflow.
+ - **FIX**: udpating version of package in changelog.
+ - **FIX**: keeping naming consistent.
+ - **FIX**: removing badge for check.
+ - **FIX**: updating placeholder.
+ - **FEAT**: add attribution to original JavaScript PRE implementation (#3).
+ - **FEAT**: adding analysis_options for dart and updating pubspec (#2).
+ - **FEAT**: updating readme with status badges.
+ - **FEAT**: adding a placeholder release workflow.
+ - **FEAT**: adding release workflow.
+ - **FEAT**: adding melos config.
+ - **FEAT**: adding workflows to check and publish.
+ - **FEAT**: updating name of the package.
+ - **FEAT**: adding recrypt code.
+
 # Changelog
 
 ## 1.0.0

@@ -1,0 +1,29 @@
+# .gitleaksignore
+
+# Ignore all files in the build directories
+
+build/
+
+# Ignore lock files
+
+\*.lock
+pubspec.lock
+
+# Ignore generated files
+
+_.dart_tool/
+_.packages
+
+# Ignore test and example directories (as they shouldn't contain sensitive info)
+
+test/
+example/
+
+# Ignore IDE config files
+
+.idea/
+.vscode/
+
+# Ignore generated API client files
+
+lib/generated/

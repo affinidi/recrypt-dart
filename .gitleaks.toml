@@ -1,0 +1,49 @@
+# .gitleaks.toml
+
+# General settings
+title = "Recrypt Dart Gitleaks Configuration"
+ignore_file = ".gitleaksignore"  # Specifies the ignore file
+
+# Gitleaks Settings
+[leaks]
+    # Enable "Gitleaks" secret scanning
+    enable = true
+    # Include commits that have secrets in them.
+    commit = true
+    # Include tags with secrets.
+    tag = true
+    # Include pull requests with secrets.
+    pr = true
+    # This will ensure no files are skipped.
+    skip = []
+
+[[rules]]
+  description = "AWS Access Key ID"
+  regex = '''AKIA[0-9A-Z]{16}'''
+  tags = ["AWS", "Key", "Secret"]
+  file = ".*"
+  allowlist = []
+
+[[rules]]
+  description = "Google Cloud API Key"
+  regex = '''AIza[0-9A-Za-z-_]{35}'''
+  tags = ["Google Cloud", "API Key"]
+  file = ".*"
+
+[[rules]]
+  description = "Slack OAuth Access Token"
+  regex = '''xoxb-[0-9]{12}-[0-9]{12}-[0-9]{24}'''
+  tags = ["Slack", "OAuth", "Token"]
+  file = ".*"
+
+[[rules]]
+  description = "Firebase API Key"
+  regex = '''AIza[0-9A-Za-z-_]{35}'''
+  tags = ["Firebase", "API Key"]
+  file = ".*"
+
+[[rules]]
+  description = "Stripe Secret Key"
+  regex = '''sk_live_[0-9a-zA-Z]{24}'''
+  tags = ["Stripe", "Secret Key"]
+  file = ".*"

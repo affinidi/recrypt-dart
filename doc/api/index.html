@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="proxy_recrypt API docs, for the Dart programming language.">
+  <title>proxy_recrypt - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li class="self-crumb">proxy_recrypt package</li>
+  </ol>
+  <div class="self-name">proxy_recrypt</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p><a href="https://github.com/affinidi/recrypt-dart/actions/workflows/release.yaml"><img src="https://github.com/affinidi/recrypt-dart/actions/workflows/release.yaml/badge.svg" alt="release"></a>
+<a href="https://github.com/affinidi/recrypt-dart/actions/workflows/publish.yaml"><img src="https://github.com/affinidi/recrypt-dart/actions/workflows/publish.yaml/badge.svg" alt="publish"></a></p>
+<h1 id="recrypt">recrypt</h1>
+<p>Proxy Re-Encryption (PRE) utilities for Dart enabling secure, server-mediated sharing of encrypted data without exposing plaintext.
+This library lets a data owner encrypt content once, then delegate decryption rights to other parties via transformation (re-encryption) keys—without sharing private keys or re-encrypting the original data.</p>
+<h2 id="use-cases">Use cases:</h2>
+<ul>
+<li>End-to-end encrypted group or multi-recipient messaging</li>
+<li>Zero-knowledge relay / brokered data exchange</li>
+<li>Secure access delegation and revocation
+Core concepts:</li>
+<li>Owner encrypts a symmetric content key under their public key</li>
+<li>A transformation key (owner private key + recipient public key) lets an untrusted server convert the encrypted key for a recipient</li>
+<li>Recipient uses their private key to recover the symmetric key and decrypt the content</li>
+<li>Server never learns the plaintext or symmetric key</li>
+</ul>
+<h2 id="benefits">Benefits:</h2>
+<ul>
+<li>Least-privilege server role</li>
+<li>Scales better than encrypting separately for every recipient</li>
+<li>Cryptographic separation of duties (encryption, transformation, decryption)</li>
+<li>Ideal when you need brokered delivery (e.g. group chat) where the transport service must route but not read messages.</li>
+</ul>
+<h2 id="attribution">Attribution</h2>
+<p>This Dart implementation was inspired by the original JavaScript proxy re-encryption implementation available at:</p>
+<ul>
+<li><a href="https://asecuritysite.com/javascript/pre_javascript">JavaScript PRE Implementation</a></li>
+<li><a href="https://asecuritysite.com/proxy.min.js">Proxy Script</a></li>
+</ul>
+<p>We acknowledge and appreciate the foundational work that guided our Dart port.</p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="proxy_recrypt">
+  <span class="name"><a href="proxy_recrypt/">proxy_recrypt</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li class="self-crumb">proxy_recrypt package</li>
+</ol>
+
+    <h5 class="hidden-xs"><span class="package-name">proxy_recrypt</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="proxy_recrypt/">proxy_recrypt</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+</main>
+<footer>
+  <span class="no-break">
+    proxy_recrypt
+      1.1.0
+  </span>
+  
+</footer>
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

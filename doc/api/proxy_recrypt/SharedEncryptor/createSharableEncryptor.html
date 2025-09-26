@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the createSharableEncryptor method from the SharedEncryptor class, for the Dart programming language.">
+  <title>createSharableEncryptor method - SharedEncryptor class - proxy_recrypt library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">proxy_recrypt</a></li>
+    <li><a href="../../proxy_recrypt/">proxy_recrypt.dart</a></li>
+    <li><a href="../../proxy_recrypt/SharedEncryptor-class.html">SharedEncryptor</a></li>
+    <li class="self-crumb">createSharableEncryptor static method</li>
+  </ol>
+  <div class="self-name">createSharableEncryptor</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="proxy_recrypt&#47;SharedEncryptor-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">createSharableEncryptor</span> static method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="../../proxy_recrypt/SharedEncryptor-class.html">SharedEncryptor</a></span>
+<span class="name ">createSharableEncryptor</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="createSharableEncryptor-param-publicKey"><span class="type-annotation"><a href="../../proxy_recrypt/PublicKey-class.html">PublicKey</a></span> <span class="parameter-name">publicKey</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Generates a new shared key using the given public key.</p>
+<p>This is the primary way to create a new shared key for encryption.
+The generated key can be stored and reused, or transmitted to a proxy
+for re-encryption.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">static SharedEncryptor createSharableEncryptor(PublicKey publicKey) {
+  var recrypt = Recrypt();
+  var result = recrypt.encapsulate(publicKey);
+  var capsule = result[&#39;capsule&#39;] as Capsule;
+  var key = result[&#39;symmetricKey&#39;] as List&lt;int&gt;;
+  var iv = encrypt_pkg.IV.fromLength(12); &#47;&#47; 96 bits for GCM
+  return SharedEncryptor(capsule, key, iv);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">proxy_recrypt</a></li>
+    <li><a href="../../proxy_recrypt/">proxy_recrypt</a></li>
+    <li><a href="../../proxy_recrypt/SharedEncryptor-class.html">SharedEncryptor</a></li>
+    <li class="self-crumb">createSharableEncryptor static method</li>
+</ol>
+
+    <h5>SharedEncryptor class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    proxy_recrypt
+      1.1.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the fromBase64 method from the Capsule class, for the Dart programming language.">
+  <title>fromBase64 method - Capsule class - proxy_recrypt library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">proxy_recrypt</a></li>
+    <li><a href="../../proxy_recrypt/">proxy_recrypt.dart</a></li>
+    <li><a href="../../proxy_recrypt/Capsule-class.html">Capsule</a></li>
+    <li class="self-crumb">fromBase64 static method</li>
+  </ol>
+  <div class="self-name">fromBase64</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="proxy_recrypt&#47;Capsule-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">fromBase64</span> static method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="../../proxy_recrypt/Capsule-class.html">Capsule</a></span>
+<span class="name ">fromBase64</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="fromBase64-param-base64"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">base64</span>, [</span></li>
+<li><span class="parameter" id="fromBase64-param-params"><span class="type-annotation"><a href="https://pub.dev/documentation/pointycastle/3.9.1/pointycastle/ECDomainParameters-class.html">ECDomainParameters</a>?</span> <span class="parameter-name">params</span></span></li>
+</ol>])
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Create a Capsule from base64 string</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">static Capsule fromBase64(String base64, [pc.ECDomainParameters? params]) {
+  params ??= pc.ECDomainParameters(defaultCurve);
+  var bytes = base64Decode(base64);
+  if (bytes.length &lt; 162) {
+    throw ArgumentError(
+      &#39;Invalid capsule length: ${bytes.length} bytes. Expected at least 162 bytes.&#39;,
+    );
+  }
+  var E = GroupElement.fromBytes(bytes.sublist(0, 65), params);
+  var V = GroupElement.fromBytes(bytes.sublist(65, 130), params);
+  var S = Scalar.fromBytes(bytes.sublist(130, 162), params.n);
+
+  &#47;&#47; Parse XG if present
+  &#47;&#47; ignore: non_constant_identifier_names
+  GroupElement? XG;
+  if (bytes.length &gt;= 227) {
+    &#47;&#47; 162 + 65
+    XG = GroupElement.fromBytes(bytes.sublist(162, 227), params);
+  }
+
+  return Capsule(E, V, S, XG, params);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">proxy_recrypt</a></li>
+    <li><a href="../../proxy_recrypt/">proxy_recrypt</a></li>
+    <li><a href="../../proxy_recrypt/Capsule-class.html">Capsule</a></li>
+    <li class="self-crumb">fromBase64 static method</li>
+</ol>
+
+    <h5>Capsule class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    proxy_recrypt
+      1.1.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

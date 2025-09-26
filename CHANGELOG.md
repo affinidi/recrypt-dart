@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-09-26
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`proxy_recrypt` - `v1.1.1`](#proxy_recrypt---v111)
+
+---
+
+#### `proxy_recrypt` - `v1.1.1`
+
+ - **FIX**: Adding codeowners.
+
+## 1.1.1
+
+ - **FIX**: Adding codeowners.
+
+
 ## 2025-09-24
 
 ### Changes

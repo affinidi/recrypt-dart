@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:pointycastle/block/modes/gcm.dart';
 import 'package:pointycastle/export.dart' as pc;
 import '../../proxy_recrypt.dart';
 import 'iv.dart';
@@ -48,19 +49,11 @@ class SharedEncryptor {
   ///
   /// Returns the encrypted message as a base64 string.
   String encrypt(String message) {
-    final cipher = pc.GCMBlockCipher(pc.AESEngine());
-    final params = pc.AEADParameters(
-      pc.KeyParameter(Uint8List.fromList(key)),
-      128,
-      iv.bytes,
-      Uint8List(0),
-    );
+    final messageBytes = Uint8List.fromList(utf8.encode(message));
+    final cipher = SharedEncryptor._getCipher(
+        forEncryption: true, key: key, ivBytes: iv.bytes);
 
-    cipher.init(true, params);
-
-    final plaintext = Uint8List.fromList(utf8.encode(message));
-    final ciphertext = cipher.process(plaintext);
-
+    final ciphertext = cipher.process(messageBytes);
     return base64Encode(ciphertext);
   }
 
@@ -71,19 +64,11 @@ class SharedEncryptor {
   ///
   /// Returns the decrypted message as a string.
   String decrypt(String encryptedBase64) {
-    final cipher = pc.GCMBlockCipher(pc.AESEngine());
-    final params = pc.AEADParameters(
-      pc.KeyParameter(Uint8List.fromList(key)),
-      128,
-      iv.bytes,
-      Uint8List(0),
-    );
-
-    cipher.init(false, params);
-
     final encryptedBytes = base64Decode(encryptedBase64);
-    final plaintext = cipher.process(encryptedBytes);
+    final cipher = SharedEncryptor._getCipher(
+        forEncryption: false, key: key, ivBytes: iv.bytes);
 
+    final plaintext = cipher.process(encryptedBytes);
     return utf8.decode(plaintext);
   }
 
@@ -166,16 +151,7 @@ class SharedEncryptor {
       var encrypted = data['encrypted'] as String;
       var iv = Uint8List.fromList(base64Decode(data['iv'] as String));
 
-      final cipher = pc.GCMBlockCipher(pc.AESEngine());
-      final params = pc.AEADParameters(
-        pc.KeyParameter(Uint8List.fromList(key)),
-        128,
-        iv,
-        Uint8List(0),
-      );
-
-      cipher.init(false, params);
-
+      final cipher = _getCipher(forEncryption: false, key: key, ivBytes: iv);
       final encryptedBytes = base64Decode(encrypted);
       final plaintext = cipher.process(encryptedBytes);
 
@@ -183,5 +159,22 @@ class SharedEncryptor {
     } catch (e) {
       throw FormatException('Invalid package format: $e');
     }
+  }
+
+  static GCMBlockCipher _getCipher({
+    required bool forEncryption,
+    required List<int> key,
+    required Uint8List ivBytes,
+  }) {
+    final cipher = pc.GCMBlockCipher(pc.AESEngine());
+    final params = pc.AEADParameters(
+      pc.KeyParameter(Uint8List.fromList(key)),
+      128,
+      ivBytes,
+      Uint8List(0),
+    );
+
+    cipher.init(forEncryption, params);
+    return cipher;
   }
 }

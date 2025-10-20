@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:encrypt/encrypt.dart' as encrypt_pkg;
+import 'package:pointycastle/block/modes/gcm.dart';
+import 'package:pointycastle/export.dart' as pc;
 import '../../proxy_recrypt.dart';
+import 'iv.dart';
 
 /// A class representing a shared key that can be used for encryption and decryption.
 ///
@@ -18,7 +20,7 @@ import '../../proxy_recrypt.dart';
 class SharedEncryptor {
   final Capsule capsule;
   final List<int> key;
-  final encrypt_pkg.IV iv;
+  final IV iv;
 
   /// Creates a new shared key with the given components.
   ///
@@ -36,7 +38,7 @@ class SharedEncryptor {
     var result = recrypt.encapsulate(publicKey);
     var capsule = result['capsule'] as Capsule;
     var key = result['symmetricKey'] as List<int>;
-    var iv = encrypt_pkg.IV.fromLength(12); // 96 bits for GCM
+    var iv = IV.fromLength(12); // 96 bits for GCM
     return SharedEncryptor(capsule, key, iv);
   }
 
@@ -47,11 +49,12 @@ class SharedEncryptor {
   ///
   /// Returns the encrypted message as a base64 string.
   String encrypt(String message) {
-    var key = encrypt_pkg.Key(Uint8List.fromList(this.key));
-    var encrypter = encrypt_pkg.Encrypter(
-        encrypt_pkg.AES(key, mode: encrypt_pkg.AESMode.gcm));
-    var encrypted = encrypter.encrypt(message, iv: iv);
-    return encrypted.base64;
+    final messageBytes = Uint8List.fromList(utf8.encode(message));
+    final cipher = SharedEncryptor._getCipher(
+        forEncryption: true, key: key, ivBytes: iv.bytes);
+
+    final ciphertext = cipher.process(messageBytes);
+    return base64Encode(ciphertext);
   }
 
   /// Decrypts a message using the shared key.
@@ -61,11 +64,12 @@ class SharedEncryptor {
   ///
   /// Returns the decrypted message as a string.
   String decrypt(String encryptedBase64) {
-    var key = encrypt_pkg.Key(Uint8List.fromList(this.key));
-    var encrypter = encrypt_pkg.Encrypter(
-        encrypt_pkg.AES(key, mode: encrypt_pkg.AESMode.gcm));
-    var encrypted = encrypt_pkg.Encrypted.fromBase64(encryptedBase64);
-    return encrypter.decrypt(encrypted, iv: iv);
+    final encryptedBytes = base64Decode(encryptedBase64);
+    final cipher = SharedEncryptor._getCipher(
+        forEncryption: false, key: key, ivBytes: iv.bytes);
+
+    final plaintext = cipher.process(encryptedBytes);
+    return utf8.decode(plaintext);
   }
 
   /// Serializes the shared key to a base64 string.
@@ -102,7 +106,7 @@ class SharedEncryptor {
       var data = jsonDecode(utf8.decode(base64Decode(base64)));
       var capsule = Capsule.fromBase64(data['capsule']);
       var key = base64Decode(data['key']);
-      var iv = encrypt_pkg.IV.fromBase64(data['iv']);
+      var iv = IV.fromBase64(data['iv']);
       return SharedEncryptor(capsule, key, iv);
     } catch (e) {
       throw FormatException('Invalid shared key format: $e');
@@ -145,15 +149,32 @@ class SharedEncryptor {
     try {
       var data = jsonDecode(utf8.decode(base64Decode(package)));
       var encrypted = data['encrypted'] as String;
-      var iv = encrypt_pkg.IV.fromBase64(data['iv'] as String);
+      var iv = Uint8List.fromList(base64Decode(data['iv'] as String));
 
-      var encrypter = encrypt_pkg.Encrypter(encrypt_pkg.AES(
-          encrypt_pkg.Key(Uint8List.fromList(key)),
-          mode: encrypt_pkg.AESMode.gcm));
-      var encryptedData = encrypt_pkg.Encrypted.fromBase64(encrypted);
-      return encrypter.decrypt(encryptedData, iv: iv);
+      final cipher = _getCipher(forEncryption: false, key: key, ivBytes: iv);
+      final encryptedBytes = base64Decode(encrypted);
+      final plaintext = cipher.process(encryptedBytes);
+
+      return utf8.decode(plaintext);
     } catch (e) {
       throw FormatException('Invalid package format: $e');
     }
+  }
+
+  static GCMBlockCipher _getCipher({
+    required bool forEncryption,
+    required List<int> key,
+    required Uint8List ivBytes,
+  }) {
+    final cipher = pc.GCMBlockCipher(pc.AESEngine());
+    final params = pc.AEADParameters(
+      pc.KeyParameter(Uint8List.fromList(key)),
+      128,
+      ivBytes,
+      Uint8List(0),
+    );
+
+    cipher.init(forEncryption, params);
+    return cipher;
   }
 }

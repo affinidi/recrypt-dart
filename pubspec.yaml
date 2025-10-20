@@ -9,9 +9,8 @@ environment:
 dependencies:
   convert: ^3.1.2       # For hex encoding/decoding
   crypto: ^3.0.6        # For SHA256 and other crypto functions
-  cryptography: ^2.7.0
-  encrypt: ^5.0.3       # For AES encryption
-  pointycastle: ^3.7.3  # For elliptic curve operations
+  cryptography: ^2.7.0  # For AES encryption
+  pointycastle: ^4.0.0  # For elliptic curve operations
 
 
 dev_dependencies:

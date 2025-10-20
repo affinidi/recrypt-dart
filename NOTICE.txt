@@ -1,1 +1,7 @@
 This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the this notice when  they are further distributing this code.
+
+This project includes code from the 'encrypt' library (https://github.com/leocavalcante/encrypt), which is licensed under the BSD 3-Clause License.
+The code is used in the file: `lib/src/crypto/iv.dart`
+
+Copyright (c) 2018, Leo Cavalcante
+All rights reserved.

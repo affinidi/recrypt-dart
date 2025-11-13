@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-11-13
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`proxy_recrypt` - `v1.1.4`](#proxy_recrypt---v114)
+
+---
+
+#### `proxy_recrypt` - `v1.1.4`
+
+ - **FIX**: adding correct suffix to the version (#9).
+ - **FIX**: adding experimental to pub dev topic and to the version (#8).
+
+## 1.1.4
+
+ - **FIX**: adding correct suffix to the version (#9).
+ - **FIX**: adding experimental to pub dev topic and to the version (#8).
+
+
 ## 2025-10-20
 
 ### Changes
